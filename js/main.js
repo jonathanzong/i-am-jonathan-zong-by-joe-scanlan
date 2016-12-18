@@ -10,4 +10,9 @@ $(document).ready(function() {
   }
   resetRight();
   $(window).resize(resetRight);
+  $(".jonathan .studio-img").one("load", function() {
+    resetRight();
+  }).each(function() {
+    if(this.complete) $(this).load();
+  });
 })
