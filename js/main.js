@@ -6,11 +6,11 @@ $(document).ready(function() {
   });
 
   function resetRight() {
-    $(".jonathan .studio-img").panzoom("pan", -$(".jonathan .studio-img").width(), 0, {silent: true, relative: true});
+    $(".drew .studio-img").panzoom("pan", -$(".jonathan .studio-img").width(), 0, {silent: true, relative: true});
   }
   resetRight();
   $(window).resize(resetRight);
-  $(".jonathan .studio-img").one("load", function() {
+  $(".drew .studio-img").one("load", function() {
     resetRight();
   }).each(function() {
     if(this.complete) $(this).load();
@@ -30,24 +30,31 @@ $(document).ready(function() {
     });
     if (done) {
       commits.sort(function(a, b) {
-          return -a.date.localeCompare(b.date);
+          var c = a.date.localeCompare(b.date);
+          if (c == 0) {
+            return a.name.localeCompare(b.name);
+          }
+          return -c;
       });
       $.each(commits, function() {
         var $li = $("<li>");
         var $a = $("<a>");
-        $a.text(this.name + " " + this.date);
+        $('.subnav').append($li);
+        if (this.name.indexOf("Jonathan") >= 0) {
+          if ($('.jonathan .timestamp').text().trim().length < 1)
+            $('.jonathan .timestamp').text("Last revision: "+this.date);
+          $a.text(this.name + " " + this.date);
+        }
+        else {
+          if ($('.drew .timestamp').text().trim().length < 1)
+            $('.drew .timestamp').text("Last revision: "+this.date);
+          $a.text(this.name + "  " + this.date);
+        }
         $a.attr("data-img", this.img);
         $a.attr("data-name", this.name);
         $a.attr("data-date", this.date);
         $a.attr("href", "#");
         $li.append($a);
-        $('.subnav').append($li);
-        if (this.name.indexOf("Jonathan") >= 0) {
-          $('.jonathan .timestamp').text("Last revision: "+this.date);
-        }
-        else {
-          $('.drew .timestamp').text("Last revision: "+this.date);
-        }
       });
     }
     else {

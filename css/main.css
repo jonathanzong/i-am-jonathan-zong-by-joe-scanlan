@@ -30,11 +30,11 @@ html, body {
   transform: translateY(-50%);
 }
 
-.drew .img-contain {
+.jonathan .img-contain {
   border-right: 0.5px solid white;
 }
 
-.jonathan .img-contain {
+.drew .img-contain {
   border-left: 0.5px solid white;
 }
 
@@ -83,6 +83,6 @@ a, a:hover, a:active, a:visited {
 nav ul li {float:left;display:inline;}
 nav ul li a {display:block;}
 nav ul li ul {position:absolute; padding: 0;}
-nav ul li ul li a {display:block; width: 290px;}
+nav ul li ul li a {display:block; width: 290px; white-space:pre;}
 nav ul li ul.fallback {display:none;}
 nav ul li:hover ul.fallback {display:block;}
