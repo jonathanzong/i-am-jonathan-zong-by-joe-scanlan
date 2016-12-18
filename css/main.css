@@ -1,0 +1,71 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html, body {
+  height: 100%;
+  height: 100vh;
+  font-family: 'Space Mono', monospace;
+  color: white;
+  overflow-y: hidden;
+}
+
+.container-fluid, .row, .col-xs-6 {
+  height: 100%;
+  height: 100vh;
+}
+
+.col-xs-6 {
+  position: relative;
+  padding: 0;
+}
+
+.col-xs-6 .img-contain {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.drew .img-contain {
+  border-right: 0.5px solid white;
+}
+
+.jonathan .img-contain {
+  border-left: 0.5px solid white;
+}
+
+.img-contain img {
+  width: 200%;
+}
+
+.overlay > div {
+  position: fixed;
+  z-index: 1;
+}
+
+.title {
+  text-align: center;
+  top: 33%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.title span, .nav a {
+  display: inline-block;
+  padding: 0px 2px;
+  background: rgba(0,0,0,0.7);
+}
+
+.nav {
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);  
+}
+
+a, a:hover, a:active, a:visited {
+  color: white;
+  text-decoration: none;
+}
