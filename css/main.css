@@ -42,7 +42,7 @@ html, body {
   width: 200%;
 }
 
-.overlay > div {
+.overlay {
   position: fixed;
   z-index: 1;
 }
@@ -58,7 +58,7 @@ html, body {
   margin: 1px;
 }
 
-.title span, .nav a {
+.title span, .nav a, .timestamp {
   padding: 0 3px;
   margin: 0 5px;
   background: rgba(255, 255, 255, 0.9);
@@ -74,7 +74,11 @@ a, a:hover, a:active, a:visited {
   color: black;
 }
 
-
+.timestamp {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+}
 
 nav ul li {float:left;display:inline;}
 nav ul li a {display:block;}

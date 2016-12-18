@@ -38,9 +38,16 @@ $(document).ready(function() {
         $a.text(this.name + " " + this.date);
         $a.attr("data-img", this.img);
         $a.attr("data-name", this.name);
+        $a.attr("data-date", this.date);
         $a.attr("href", "#");
         $li.append($a);
         $('.subnav').append($li);
+        if (this.name.indexOf("Jonathan") >= 0) {
+          $('.jonathan .timestamp').text("Last revision: "+this.date);
+        }
+        else {
+          $('.drew .timestamp').text("Last revision: "+this.date);
+        }
       });
     }
     else {
@@ -59,8 +66,10 @@ $(document).ready(function() {
     console.log(this);
     if ($(this).attr('data-name').indexOf("Jonathan") >= 0) {
       $('.jonathan .studio-img').attr('src', $(this).attr('data-img'));
+      $('.jonathan .timestamp').text("Viewing revision: "+$(this).attr('data-date'));
     } else {
       $('.drew .studio-img').attr('src', $(this).attr('data-img'));
+      $('.drew .timestamp').text("Viewing revision: "+$(this).attr('data-date'));
     }
     return false;
   })
