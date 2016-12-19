@@ -157,7 +157,23 @@ $(document).ready(function() {
       $('.drew .timestamp').text(prefix + $(this).attr('data-dateStr') + postfix);
     }
     return false;
-  })
+  });
+
+  $('nav ul li').click(function(e) {
+    e.preventDefault();
+    if (!$(this).hasClass('active')) {
+      $(this).addClass('active');
+      $(document).one('click', function closeMenu (e){
+          if($('nav ul li').has(e.target).length === 0){
+              $('nav ul li').removeClass('active');
+          } else {
+              $(document).one('click', closeMenu);
+          }
+      });
+    } else {
+      $(this).removeClass('active');
+    }
+  });
 });
 
 var foo = atob("JmFjY2Vzc190b2tlbj0wYTNjNDJmODY2MjM1OWRhOWI3M2M3Y2U3OTI5NDNmYmIwNDI5NWNh");

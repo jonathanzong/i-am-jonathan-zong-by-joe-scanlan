@@ -69,6 +69,17 @@ html, body {
   text-align: justify;
 }
 
+@media(max-width:767px){
+  .title > div {
+    max-height: 295px;
+    overflow-y: scroll;
+  }
+  .title p {
+    padding: 7.5px;
+    text-align: center;
+  }
+}
+
 .nav {
   top: 15px;
   left: 50%;
@@ -101,3 +112,4 @@ nav ul li ul { position:absolute; padding: 0; }
 nav ul li ul li a { display:block;  white-space:pre; }
 nav ul li ul.fallback { display:none; }
 nav ul li:hover ul.fallback { display:block; }
+nav ul li.active ul.fallback { display:block; }
