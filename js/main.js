@@ -20,15 +20,46 @@ $(document).ready(function() {
 
   // });
 
+
+  // month: int [0, 11]
+  function getMonthString(month) {
+    if (month === 0)  return "Jan";
+    if (month === 1)  return "Feb";
+    if (month === 2)  return "Mar";
+    if (month === 3)  return "Apr";
+    if (month === 4)  return "May";
+    if (month === 5)  return "Jun";
+    if (month === 6)  return "Jul";
+    if (month === 7)  return "Aug";
+    if (month === 8)  return "Sep";
+    if (month === 9)  return "Oct";
+    if (month === 10) return "Nov";
+    if (month === 11) return "Dec";
+    return "";
+  }
+
+  function pad(num, width, chr) {
+    num = num + '';
+    width = width || 2;
+    chr = chr || " ";
+    return num.length >= width ? num : new Array(width - num.length + 1).join(chr) + num;
+  }
+
   var commits = [];
   var done = false;
 
   function cb(json, who) {
     $.each(json, function() {
       var img = "https://github.com/jonathanzong/i-am-jonathan-zong-by-joe-scanlan/raw/"+this.sha+"/studio.jpg";
+
+      var date = new Date(this.commit.committer.date);
+      var dateStr = getMonthString(date.getMonth()) + " " + pad(date.getDate(), 2) + " "  + date.getFullYear()
+                    + "  " + pad(date.getHours(), 2, "0") + ":" + pad(date.getMinutes(), 2, "0");
+
       commits.push({
         img: img,
         date: this.commit.committer.date.split(/[TZ]/).join(' ').trim(),
+        dateStr: dateStr,
         name: who
       });
     });
@@ -49,7 +80,7 @@ $(document).ready(function() {
         
         if (this.name.indexOf("Jonathan") >= 0) {
           if ($('.jonathan .timestamp').text().trim().length < 1)
-            $('.jonathan .timestamp').text("Last revision: "+this.date);
+            $('.jonathan .timestamp').text("last revision: "+this.dateStr);
           
           if (i === commits.length-1) {
             var prefix = " * ┘  ";
@@ -57,17 +88,18 @@ $(document).ready(function() {
           else {
             var prefix = " * │  ";
           }
-          $a.text(prefix + this.name + "  " + this.date);
+          $a.text(prefix + this.name + "  " + this.dateStr);
         }
         else {
           if ($('.drew .timestamp').text().trim().length < 1)
-            $('.drew .timestamp').text("Last revision: "+this.date);
-          $a.text(" │ *  " + this.name + "   " + this.date);
+            $('.drew .timestamp').text("last revision: "+this.dateStr);
+          $a.text(" │ *  " + this.name + "   " + this.dateStr);
         }
 
         $a.attr("data-img", this.img);
         $a.attr("data-name", this.name);
         $a.attr("data-date", this.date);
+        $a.attr("data-dateStr", this.dateStr);
         $a.attr("href", "#");
         $li.append($a);
       });
@@ -88,10 +120,10 @@ $(document).ready(function() {
     console.log(this);
     if ($(this).attr('data-name').indexOf("Jonathan") >= 0) {
       $('.jonathan .studio-img').attr('src', $(this).attr('data-img'));
-      $('.jonathan .timestamp').text("Viewing revision: "+$(this).attr('data-date'));
+      $('.jonathan .timestamp').text("viewing revision: "+$(this).attr('data-dateStr'));
     } else {
       $('.drew .studio-img').attr('src', $(this).attr('data-img'));
-      $('.drew .timestamp').text("Viewing revision: "+$(this).attr('data-date'));
+      $('.drew .timestamp').text("viewing revision: "+$(this).attr('data-dateStr'));
     }
     return false;
   })
