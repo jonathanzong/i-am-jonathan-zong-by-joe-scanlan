@@ -129,14 +129,11 @@ $(document).ready(function() {
   })
 });
 
-var foo = atob("ZjI1OGJhMWM2MzY5YzdiZDM3Nzc=");
-var bar = atob("OGUzNTIxNzBkYjNlYjYxOGVhNjVkZTkyOTcwYmRiZjYyN2U0MDExOA==");
-var cat = atob("JmNsaWVudF9pZD0=");
-var dog = atob("JmNsaWVudF9zZWNyZXQ9");
+var foo = atob("JmFjY2Vzc190b2tlbj0zN2E0ZDFjYjgwYTBkNWQxNTU0MWY5MDc3ZDg3OGNhNjQxMDYxZmY2");
 
 function requestJSON(path, callback) {
   $.ajax({
-    url: "https://api.github.com" + path + cat + foo + dog + bar,
+    url: "https://api.github.com" + path + foo,
     complete: function(xhr) {
       callback.call(null, xhr.responseJSON);
     }
