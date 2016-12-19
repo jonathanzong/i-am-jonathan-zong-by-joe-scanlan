@@ -73,14 +73,21 @@ $(document).ready(function() {
           return -c;
       });
 
+      var isCurJonathan = true;
+      var isCurDrew = true;
       $.each(commits, function(i) {
         var $li = $("<li>");
         var $a = $("<a>");
         $('.subnav').append($li);
         
+        var isCurrent = false;
+
         if (this.name.indexOf("Jonathan") >= 0) {
-          if ($('.jonathan .timestamp').text().trim().length < 1)
-            $('.jonathan .timestamp').text("last revision: "+this.dateStr);
+          isCurrent = isCurJonathan;
+          isCurJonathan = false;
+          if ($('.jonathan .timestamp').text().trim().length < 1) {
+            $('.jonathan .timestamp').text("viewing revision: " + this.dateStr + "  (latest)");
+          }
           
           if (i === commits.length-1) {
             var prefix = " * ┘  ";
@@ -91,11 +98,15 @@ $(document).ready(function() {
           $a.text(prefix + this.name + "  " + this.dateStr);
         }
         else {
-          if ($('.drew .timestamp').text().trim().length < 1)
-            $('.drew .timestamp').text("last revision: "+this.dateStr);
+          isCurrent = isCurDrew;
+          isCurDrew = false;
+          if ($('.drew .timestamp').text().trim().length < 1) {
+            $('.drew .timestamp').text("viewing revision: " + this.dateStr + "  (latest)");
+          }
           $a.text(" │ *  " + this.name + "   " + this.dateStr);
         }
 
+        $a.attr("data-isCurrent", isCurrent);
         $a.attr("data-img", this.img);
         $a.attr("data-name", this.name);
         $a.attr("data-date", this.date);
@@ -118,12 +129,14 @@ $(document).ready(function() {
 
   $(document).on('click', '.revisions a', function(e) {
     console.log(this);
+    var prefix = "viewing revision: ";
+    var postfix = $(this).attr('data-isCurrent')==="true" ? " (latest)" : "";
     if ($(this).attr('data-name').indexOf("Jonathan") >= 0) {
       $('.jonathan .studio-img').attr('src', $(this).attr('data-img'));
-      $('.jonathan .timestamp').text("viewing revision: "+$(this).attr('data-dateStr'));
+      $('.jonathan .timestamp').text(prefix + $(this).attr('data-dateStr') + postfix);
     } else {
       $('.drew .studio-img').attr('src', $(this).attr('data-img'));
-      $('.drew .timestamp').text("viewing revision: "+$(this).attr('data-dateStr'));
+      $('.drew .timestamp').text(prefix + $(this).attr('data-dateStr') + postfix);
     }
     return false;
   })
