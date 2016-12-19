@@ -155,7 +155,7 @@ $(document).ready(function() {
   })
 });
 
-var foo = atob("JmFjY2Vzc190b2tlbj0zN2E0ZDFjYjgwYTBkNWQxNTU0MWY5MDc3ZDg3OGNhNjQxMDYxZmY2");
+var foo = atob("JmFjY2Vzc190b2tlbj0wYTNjNDJmODY2MjM1OWRhOWI3M2M3Y2U3OTI5NDNmYmIwNDI5NWNh");
 
 function requestJSON(path, callback) {
   $.ajax({
