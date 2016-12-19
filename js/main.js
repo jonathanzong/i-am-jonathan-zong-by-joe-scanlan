@@ -5,21 +5,26 @@ $(document).ready(function() {
     disableYAxis: true
   });
 
-  function resetRight() {
-    $(".drew .studio-img").panzoom("pan", -$(".jonathan .studio-img").width(), 0, {silent: true, relative: true});
+  // TODO maintain relative pan on resize events
+  // Q: should these reset on image load?
+  function resetPan() {
+    var leftOffscreen = ( $(".jonathan .studio-img").width() - 2*$(".jonathan .img-contain").width() ) / 2;
+    $(".jonathan .studio-img").panzoom("pan", -leftOffscreen, 0, {silent: true, relative: false});
+    $(".drew .studio-img").panzoom("pan", -$(".jonathan .img-contain").width() - leftOffscreen, 0, {silent: true, relative: false});
   }
-  resetRight();
-  $(window).resize(resetRight);
+  resetPan();
+  $(window).resize(resetPan);
+
   $(".drew .studio-img").one("load", function() {
-    resetRight();
+    resetPan();
   }).each(function() {
     if(this.complete) $(this).load();
   });
-
-  // $(".drew .studio-img").one("mousemove", function(event) {
-
-  // });
-
+  $(".jonathan .studio-img").one("load", function() {
+    resetPan();
+  }).each(function() {
+    if(this.complete) $(this).load();
+  });
 
   // month: int [0, 11]
   function getMonthString(month) {
