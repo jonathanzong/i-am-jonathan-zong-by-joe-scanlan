@@ -16,6 +16,10 @@ $(document).ready(function() {
     if(this.complete) $(this).load();
   });
 
+  // $(".drew .studio-img").one("mousemove", function(event) {
+
+  // });
+
   var commits = [];
   var done = false;
 
@@ -28,6 +32,7 @@ $(document).ready(function() {
         name: who
       });
     });
+
     if (done) {
       commits.sort(function(a, b) {
           var c = a.date.localeCompare(b.date);
@@ -36,20 +41,30 @@ $(document).ready(function() {
           }
           return -c;
       });
-      $.each(commits, function() {
+
+      $.each(commits, function(i) {
         var $li = $("<li>");
         var $a = $("<a>");
         $('.subnav').append($li);
+        
         if (this.name.indexOf("Jonathan") >= 0) {
           if ($('.jonathan .timestamp').text().trim().length < 1)
             $('.jonathan .timestamp').text("Last revision: "+this.date);
-          $a.text(this.name + " " + this.date);
+          
+          if (i === commits.length-1) {
+            var prefix = " * ┘  ";
+          }
+          else {
+            var prefix = " * │  ";
+          }
+          $a.text(prefix + this.name + "  " + this.date);
         }
         else {
           if ($('.drew .timestamp').text().trim().length < 1)
             $('.drew .timestamp').text("Last revision: "+this.date);
-          $a.text(this.name + "  " + this.date);
+          $a.text(" │ *  " + this.name + "   " + this.date);
         }
+
         $a.attr("data-img", this.img);
         $a.attr("data-name", this.name);
         $a.attr("data-date", this.date);

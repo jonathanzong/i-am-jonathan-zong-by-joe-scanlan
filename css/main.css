@@ -90,9 +90,9 @@ a, a:hover, a:active, a:visited {
   left: 15px;
 }
 
-nav ul li {float:left;display:inline;}
-nav ul li a {display:block;}
-nav ul li ul {position:absolute; padding: 0;}
-nav ul li ul li a {display:block; width: 290px; white-space:pre;}
-nav ul li ul.fallback {display:none;}
-nav ul li:hover ul.fallback {display:block;}
+nav ul li { float:left; display:inline; }
+nav ul li a { display:block; }
+nav ul li ul { position:absolute; padding: 0; }
+nav ul li ul li a { display:block;  white-space:pre; }
+nav ul li ul.fallback { display:none; }
+nav ul li:hover ul.fallback { display:block; }
