@@ -84,6 +84,11 @@ a, a:hover, a:active, a:visited {
   color: black;
 }
 
+a.selected-revision {
+  color: red;
+  background-color: yellow;
+}
+
 .timestamp {
   position: absolute;
   bottom: 15px;

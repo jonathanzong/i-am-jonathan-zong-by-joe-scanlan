@@ -106,6 +106,10 @@ $(document).ready(function() {
           $a.text(" │ *  " + this.name + "   " + this.dateStr);
         }
 
+        if (isCurrent) {
+          $a.addClass("selected-revision");
+        }
+
         $a.attr("data-isCurrent", isCurrent);
         $a.attr("data-img", this.img);
         $a.attr("data-name", this.name);
@@ -128,10 +132,19 @@ $(document).ready(function() {
   });
 
   $(document).on('click', '.revisions a', function(e) {
-    console.log(this);
+    var thisName = $(this).attr('data-name');
+
+    $(".revisions a").each(function(idx, elt) {
+      var sel = $(elt);
+      if (sel.attr("data-name") === thisName) {
+        sel.removeClass("selected-revision");
+      }
+    });
+      
+    $(this).addClass("selected-revision");
     var prefix = "viewing revision: ";
     var postfix = $(this).attr('data-isCurrent')==="true" ? " (latest)" : "";
-    if ($(this).attr('data-name').indexOf("Jonathan") >= 0) {
+    if (thisName.indexOf("Jonathan") >= 0) {
       $('.jonathan .studio-img').attr('src', $(this).attr('data-img'));
       $('.jonathan .timestamp').text(prefix + $(this).attr('data-dateStr') + postfix);
     } else {
