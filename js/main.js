@@ -159,13 +159,13 @@ $(document).ready(function() {
     return false;
   });
 
-  $('nav ul li').click(function(e) {
+  $('.nav-revisions').click(function(e) {
     e.preventDefault();
     if (!$(this).hasClass('active')) {
       $(this).addClass('active');
       $(document).one('click', function closeMenu (e){
-          if($('nav ul li').has(e.target).length === 0){
-              $('nav ul li').removeClass('active');
+          if($('.nav-revisions').has(e.target).length === 0){
+              $('.nav-revisions').removeClass('active');
           } else {
               $(document).one('click', closeMenu);
           }
