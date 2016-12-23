@@ -73,7 +73,7 @@ html, body {
 }
 
 .main-text {
-  
+
   margin-top: -5%;
   overflow-y: auto;
   max-height: 65vh; /* top is 33vh */
@@ -87,6 +87,11 @@ html, body {
   .title p {
     /*padding: 7.5px;*/
   }
+}
+
+.revisions {
+  /* kinda arbitrary limit just to keep it in 1 column:; */
+  max-width: 200px;
 }
 
 .nav {
