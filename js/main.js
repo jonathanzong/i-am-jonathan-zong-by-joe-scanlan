@@ -53,6 +53,8 @@ $(document).ready(function() {
   var commits = [];
   var done = false;
 
+  var timestampPrefix = "";
+
   function cb(json, who) {
     $.each(json, function() {
       var img = "https://github.com/jonathanzong/i-am-jonathan-zong-by-joe-scanlan/raw/"+this.sha+"/studio.jpg";
@@ -91,7 +93,7 @@ $(document).ready(function() {
           isCurrent = isCurJonathan;
           isCurJonathan = false;
           if ($('.jonathan .timestamp').text().trim().length < 1) {
-            $('.jonathan .timestamp').text("viewing revision: " + this.dateStr + "  (latest)");
+            $('.jonathan .timestamp').text(timestampPrefix + this.dateStr + "  (latest)");
           }
           
           if (i === commits.length-1) {
@@ -106,7 +108,7 @@ $(document).ready(function() {
           isCurrent = isCurDrew;
           isCurDrew = false;
           if ($('.drew .timestamp').text().trim().length < 1) {
-            $('.drew .timestamp').text("viewing revision: " + this.dateStr + "  (latest)");
+            $('.drew .timestamp').text(timestampPrefix + this.dateStr + "  (latest)");
           }
           $a.text(" │ *  " + this.name + "   " + this.dateStr);
         }
@@ -147,14 +149,13 @@ $(document).ready(function() {
     });
       
     $(this).addClass("selected-revision");
-    var prefix = "viewing revision: ";
     var postfix = $(this).attr('data-isCurrent')==="true" ? " (latest)" : "";
     if (thisName.indexOf("Jonathan") >= 0) {
       $('.jonathan .studio-img').attr('src', $(this).attr('data-img'));
-      $('.jonathan .timestamp').text(prefix + $(this).attr('data-dateStr') + postfix);
+      $('.jonathan .timestamp').text(timestampPrefix + $(this).attr('data-dateStr') + postfix);
     } else {
       $('.drew .studio-img').attr('src', $(this).attr('data-img'));
-      $('.drew .timestamp').text(prefix + $(this).attr('data-dateStr') + postfix);
+      $('.drew .timestamp').text(timestampPrefix + $(this).attr('data-dateStr') + postfix);
     }
     return false;
   });
