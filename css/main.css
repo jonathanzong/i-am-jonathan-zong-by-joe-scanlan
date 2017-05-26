@@ -91,7 +91,10 @@ html, body {
 
 .revisions {
   /* kinda arbitrary limit just to keep it in 1 column:; */
-  max-width: 200px;
+  max-width: 355px;
+  /**/
+  max-height: 512px;
+  overflow-y: scroll;
 }
 
 .nav {
